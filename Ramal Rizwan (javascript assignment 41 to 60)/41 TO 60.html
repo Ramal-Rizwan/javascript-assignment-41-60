@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!--Assignment # 38-42  FUNCTIONS, switch statements, while… do-while loops-->
+<!--1. Write a custom function power ( a, b ), to calculate the value of 
+a raised to b.-->
+<script>
+  function exp(a,b)
+{
+      var ans = 1;
+      for (var i =1; i <= b; i++)
+      {
+              ans = a * ans;        
+      }
+      return ans;
+}
+document.write("2 raised to the power 3 is " + exp(2, 3));
+</script>
+<!--2. Any year is entered through the keyboard. Write a function to 
+determine whether the year is a leap year or not.-->
+<script>
+  var a=prompt("please input year");
+  if(a%4==0){
+    document.write("this is a leap year= " + a);
+  }
+  else{
+    document.write("this is not a leap year= "+ a);
+  }
+  </script>
+<!--3. If the lengths of the sides of a triangle are denoted by a, b, and 
+c, then area of triangle is given by
+area = S(S − a)(S − b)(S − c)
+where, S = ( a + b + c ) / 2
+Calculate area of triangle using 2 functions-->
+<script>
+
+    function findArea( a,  b,  c)
+    {
+        // Length of sides must be positive
+        // and sum of any two sides
+        // must be smaller than third side.
+        if (a < 0 || b < 0 || c < 0 ||
+           (a + b <= c) || a + c <= b ||
+                           b + c <= a)
+        {
+            document.write( "Not a valid triangle");
+            return;
+        }
+        let s = (a + b + c) / 2;
+        return Math.sqrt(s * (s - a) *
+                        (s - b) * (s - c));
+    }
+     
+        let a = 3.0;
+        let b = 4.0;
+        let c = 5.0;
+   
+      document.write( "Area is " + findArea(a, b, c));
+     
+     
+    </script>
+
+  
+  <!--6. Write a function to delete all vowels from a sentence. Assume 
+  that the sentence is not more than 25 characters long.-->
+  <script>
+  
+    function remVowel(str)
+    {
+        let al = [ 'a', 'e', 'i', 'o', 'u',
+                   'A', 'E', 'I', 'O', 'U' ];
+        let result = "";
+         
+        for(let i = 0; i < str.length; i++)
+        {
+             
+            if (!al.includes(str[i]))
+            {
+                result += str[i];
+            }
+        }
+        return result;
+    }
+     
+    
+    let str = "my name is ramal";
+    document.write(remVowel(str));
+      </script>
+  
+  <!--7. Write a function with switch statement to count the number of 
+  occurrences of any two vowels in succession in a line of text. 
+  For example, in the sentence
+  “Pleases read this application and give me gratuity”
+  Such occurrences are ea, ea, ui.-->
+  <script>
+  
+    function findOccurrences() {
+      var str = "Pleases read this application and give me gratuity";
+      var count = 0;
+      let haveSeenVowel = false;
+    
+      for (const letter of str.toLowerCase()) {
+        switch (letter) {
+          case 'a':
+          case 'e':
+          case 'i':
+          case 'o':
+          case 'u':
+            {
+              if (haveSeenVowel) {
+                count++;
+                haveSeenVowel = false;
+              } else {
+                haveSeenVowel = true;
+              }
+              break;
+            }
+          default:
+            haveSeenVowel = false
+        }
+      }
+    return count
+    }
+    alert("occurrences of any two vowels are " + findOccurrences());
+      </script>
+  <!--8. The distance between two cities (in km.) is input through the 
+  keyboard. Write four functions to convert and print this 
+  distance in meters, feet, inches and centimeters.-->
+  <h2>Length Converter</h2>
+  <p>Type a value in the Kilometers field to convert the value to Meters:</p>
+  
+  <p>
+    <label>Kilometers</label>
+    <input  type="number" placeholder="Kilometers" oninput="meter(this.value)" onchange="meter(this.value)">
+  </p>
+  <p>Meters: <span id="outputMeters"></span></p>
+  
+  <script>
+  function meter(Num) {
+    document.getElementById("outputMeters").innerHTML=Num*1000;
+  }
+  </script>
+  
+<p>Type a value in the Kilometers field to convert the value to Feet:</p>
+
+<p>
+  <label>Kilometers</label>
+  <input  type="number" placeholder="Kilometers" oninput="feet(this.value)" onchange="feet(this.value)">
+</p>
+
+<p>Feet: <span id="outputFeet"></span></p>
+<script>
+
+function feet(val) {
+  document.getElementById("outputFeet").innerHTML=val*3280.8;
+}
+</script>
+<p>Type a value in the Kilometers field to convert the value to Inches:</p>
+<p>
+  <label>Kilometers</label>
+  <input type="number" placeholder="Kilometers" oninput="inches(this.value)" onchange="inches(this.value)">
+</p>
+<p>Inches: <span id="outputInches"></span></p>
+
+<script>
+function inches(val2) {
+  document.getElementById("outputInches").innerHTML=val2*39370;
+}
+</script>
+<p>Type a value in the Kilometers field to convert the value to cm:</p>
+
+<p>
+  <label>Kilometers</label>
+  <input type="number" placeholder="Kilometers" oninput="cm(this.value)" onchange="cm(this.value)">
+</p>
+<p>cm: <span id="outputcm"></span></p>
+
+<script>
+function cm(val3) {
+  document.getElementById("outputcm").innerHTML=val3*100000;
+}
+</script>
+  <!--9. Write a program to calculate overtime pay of employees. 
+  Overtime is paid at the rate of Rs. 12.00 per hour for every hour 
+  worked above 40 hours. Assume that employees do not work 
+  for fractional part of an hour.-->
+  <script>
+    var working_hours=prompt("Enter the working hours of employee");
+    if(working_hours>40){
+      over_time = working_hours - 40;
+     over_time_pay = over_time * 12.00;
+     document.write("Employee's overtime pay is  " + over_time_pay);
+    }
+    else{
+      document.write("You have to work for more than 40 hours to get over time pay\n");
+    }
+
+  </script>
+  <!--10. A cashier has currency notes of denominations 10, 50 and 
+  100. If the amount to be withdrawn is input through the 
+  keyboard in hundreds, find the total number of currency notes 
+  of each denomination the cashier will have to give to the 
+  withdrawer.-->
+  <script>
+    var t=parseInt(prompt("enter note in hundreds"));
+    a=t/100;
+    b=t % 100;
+    document.write("The no of 100 notes is " + a);
+    c=b/ 50;
+    d=b%50;
+    document.write("The no of 50 notes is " + c);
+    e=d/10;
+    f=d%10;
+   document.write("The no of 10 notes is " + e);
+  </script>
+
+
+  <!--Assignment # 43-48 EVENTS-->                         
+  <!--1. Show an alert box on click on a link.-->
+  <a href="JavaScript:void(0)" onClick="alert('Hi');">Click</a>
+
+<!--2. Display some Mobile images in browser. On click on an 
+image Show the message in alert to user.--> 
+<h1>mobile lookup</h1> 
+
+ <img src="data:image/jpeg;base64,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" onclick="alert('thanks for purchasing a phone from us');">
+ <img src="data:image/jpeg;base64,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" onclick="alert('thanks for purchasing a phone from us');">
+ <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNxulSlZxybLht1OeKDSgpaTY-KmCrMePG9w&usqp=CAU" onclick="alert('thanks for purchasing a phone from us');">
+ 
+   <!--3. Display 10 student records in table and each row should contain a delete 
+button. If you click on a button to delete a record, entire row should be deleted.-->   
+
+<style>
+
+  table, td {
+         border: 1px solid black;
+       }
+       </style>
+
+       <table id="myTable">
+         <thead>
+           <tr>
+             <th>Index No.</th>
+             <th>Name</th>
+             <th>Class</th>
+            
+           <tr>  
+         </thead>
+         <tbody>
+           <tr>
+             <td>01</td>
+             <td>Ali</td>
+             <td>9</td>
+             <td><input type="button" value="Delete" onclick="deleteRow(this)"></td>
+            
+           </tr>
+           <tr>
+             <td>02</td>
+             <td>Salman</td>
+             <td>7</td>
+             <td><input type="button" value="Delete" onclick="deleteRow(this)"></td>
+            
+           </tr>
+           <tr>
+             <td>03</td>
+             <td>Shan</td>
+             <td>8</td>
+             <td><input type="button" value="Delete" onclick="deleteRow(this)"></td>
+           </tr>
+           <tr>
+             <td>04</td>
+             <td>Aliyan</td>
+             <td>6</td>
+             <td><input type="button" value="Delete" onclick="deleteRow(this)"></td>
+           </tr>
+           <script>
+             function deleteRow(r) {
+               var i = r.parentNode.parentNode.rowIndex;
+               document.getElementById("myTable").deleteRow(i);
+             }
+             </script>
+
+  <!--4. Display an image in browser. Change the picture on mouseover and set the
+first picture on mouseout.--> 
+<img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg" onMouseover="src='https://img.freepik.com/free-photo/wide-angle-shot-single-tree-growing-clouded-sky-during-sunset-surrounded-by-grass_181624-22807.jpg?w=360'"
+onMouseout="src='https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg'">
+
+<!--5. Show a counter in browser. Counter should increase on click on increase 
+button and decrease on click on decrease button. And show updated counter 
+value in browser.-->    
+
+<script>
+  var counter = 0;
+
+function increase() {
+counter += 1;
+document.getElementById("clicks").innerHTML = counter;};
+
+function decrease() {
+counter -= 1;
+document.getElementById("clicks").innerHTML = counter;};
+
+</script>
+
+
+<button type="button" onClick="increase()"> increase</button>
+<button type="button" onClick="decrease()">decrease</button>
+<p>Counter: <a id="clicks">0</a></p>
+
+<!--EVENTS Assignment # 49-52-->  
+   <!--1. Create a signup form and display form data in your web 
+page on submission.-->  
+<center>
+  <form>
+      <h4>signup Form</h4>
+      <!-- Input from User -->
+      <input type="text" placeholder='Name' id="name"><br>
+      <input type="email" placeholder='Email' id="email"><br>
+      <input id='btn' type="submit" placeholder='Register' onclick="register(event)">
+  </form>
+  <!-- Output Form Details -->
+  <p>Name: <span id="display_name"></span></p>
+  <p>Email: <span id="display_email"></span></p>
+</center>
+<script>
+const register = function (event) {
+// Receive user input
+let r_name = document.querySelector("#name").value;
+let r_email = document.querySelector("#email").value;
+// Output on page
+display_name.innerHTML = r_name;
+display_email.innerHTML = r_email;
+event.preventDefault();
+};
+</script> 
+
+ <!--2. Suppose in your webpage there is content area in which 
+you have entered your item details, but user can only see 
+some details on first look. When user clicks on “Read 
+more” button, full detail of that particular item will be 
+displayed.-->  
+<p>Details about item</p>
+<p id="loris">
+   Slow lorises are a group of several species of strepsirrhine primates which make up the genus Nycticebus.
+   <a href="javascript:void(0);" onClick="expand();"><em>Read more.</em></a>
+
+   </p>
+   <script>
+   function expand() {
+    var expandedParagraph = "Slow lorises are a group of several species of trepsirrhine primates which make up the genus Nycticebus. They have a round head, narrow snout, large eyes, and a variety of distinctive coloration patterns that are species-dependent. The hands and feet of slow lorises have several adaptations that give them a pincer-like grip and enable them to grasp branches for long periods of time. Slow lorises have a toxic bite, a rare trait among mammals.";
+document.getElementById("loris").innerHTML = expandedParagraph;
+    }
+   </script>
+
+   <!--3. In previous assignment you have created a tabular data 
+using javascript. Let’s modify that. Create a form which 
+takes student’s details and show each student detail in 
+table. Each row of table must contain a delete button and 
+an edit button. On click on delete button entire row should 
+be deleted. On click on edit button, a hidden form will 
+appear with the values of that row.--> 
+<script>
+  function publishToTable() {
+      const name = document.getElementById('name').value;
+      const std_class = document.getElementById('std_class').value;
+      const error = document.getElementById('error');
+      error.innerHTML = (!name || !std_class) ? 'Name & std_class both values are required.' : '';
+      if (name && std_class) {
+          const tableElement = document.getElementById('table');
+          const trElement = document.createElement('tr');
+          const tbodyElement = document.createElement('tbody');
+          const nameEle = document.createElement('td');
+          const std_classEle = document.createElement('td');
+          nameEle.innerHTML = name;
+          std_classEle.innerHTML = std_class;
+          trElement.appendChild(nameEle);
+          trElement.appendChild(std_classEle);
+          tbodyElement.appendChild(trElement);
+          tableElement.appendChild(tbodyElement);
+      }
+  }
+</script>
+
+<body>
+  <style>
+      div.complete {
+          position: fixed;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          padding: 10%;
+          overflow: auto;
+      }
+
+      div.form {
+          height: 200px;
+      }
+
+      label {
+          margin: 20px;
+          display: block;
+          font-size: 32px;
+          font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans';
+      }
+
+      input {
+          padding: 10px;
+      }
+
+      span {
+          color: red;
+          position: fixed;
+          left: 50%;
+          transform: translate(-50%, -50%);
+      }
+
+      button {
+          padding: 10px;
+          margin-top: 40px;
+          left: 50%;
+          position: fixed;
+          transform: translate(-50%, -50%);
+          font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans';
+      }
+
+      div#tables {
+          height: 300px;
+          overflow: auto;
+      }
+
+      table,
+      th,
+      td {
+          border: 1px solid red;
+          border-collapse: collapse;
+          font-size: 32px;
+          font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans';
+          padding: 10px;
+      }
+
+      th {
+          width: 20%;
+      }
+  </style>
+  <div class="complete">
+      <div class="form">
+          <label>Name: <input id="name" type="text"></label>
+          <label>std_class: <input id="std_class" type="text"></label>
+          <span id="error"></span>
+          <button onclick="publishToTable()">Submit</button>
+      </div>
+      <div id="tables">
+          <table id="table">
+              <thead>
+                  <tr>
+                      <th>Name</th>
+                      <th>std_class</th>
+                  </tr>
+              </thead>
+          </table>
+      </div>
+  </div>
+ <!--EVENTS Assignment # 53-58-->    
+  <!--1. Consider you have 4 images in a file as shown below:-->  
+  <div class="row">
+    <div class="col">
+        <div class="content">
+            <img src=" https://media.istockphoto.com/photos/pakistan-monument-islamabad-picture-id535695503?k=20&m=535695503&s=612x612&w=0&h=S16wHXc-b3AkL7YMrcFkR2pDGFJA1bRsPmAfQlfrwkc=" onclick="openLightbox();toSlide(1)" class="hover-shadow preview" />
+        </div>
+    </div>
+    <div class="col">
+        <div class="content">
+            <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg" onclick="openLightbox();toSlide(2)" class="hover-shadow preview" />
+        </div>
+    </div>
+    <div class="col">
+        <div class="content">
+            <img src="https://media.istockphoto.com/photos/mountain-landscape-picture-id517188688?k=20&m=517188688&s=612x612&w=0&h=i38qBm2P-6V4vZVEaMy_TaTEaoCMkYhvLCysE7yJQ5Q=" onclick="openLightbox();toSlide(3)" class="hover-shadow preview" />
+        </div>
+    </div>
+    <div class="col">
+        <div class="content">
+            <img src="https://image.shutterstock.com/image-photo/mountains-under-mist-morning-amazing-260nw-1725825019.jpg" onclick="openLightbox();toSlide(4)" class="hover-shadow preview" />
+        </div>
+
+        <div id="Lightbox" class="modal">
+          <span class="close pointer" onclick="closeLightbox()">&times;</span>
+          <div class="modal-content">
+              <div class="slide">
+                  <img src=" https://media.istockphoto.com/photos/pakistan-monument-islamabad-picture-id535695503?k=20&m=535695503&s=612x612&w=0&h=S16wHXc-b3AkL7YMrcFkR2pDGFJA1bRsPmAfQlfrwkc=" class="image-slide" />
+              </div>
+              <div class="slide">
+                  <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg" class="image-slide" />
+              </div>
+              <div class="slide">
+                  <img src="https://media.istockphoto.com/photos/mountain-landscape-picture-id517188688?k=20&m=517188688&s=612x612&w=0&h=i38qBm2P-6V4vZVEaMy_TaTEaoCMkYhvLCysE7yJQ5Q=" class="image-slide" />
+              </div>
+
+           <div class="slide">
+                  <img src="https://image.shutterstock.com/image-photo/mountains-under-mist-morning-amazing-260nw-1725825019.jpg" />
+              </div>
+              <a class="previous" onclick="changeSlide(-1)">&#10094;</a>
+          <a class="next" onclick="changeSlide(1)">&#10095;</a>
+          <style>
+            html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+}
+
+.preview {
+  width: 100%;
+}
+
+.row {
+  margin-left: 10%;
+  margin-right: 10%;
+  width: 80%;
+}
+
+.row>.col {
+  padding: 0 8px;
+}
+
+.col {
+  margin-bottom: 1%;
+  float: left;
+  width: 33.33%;
+  z-index: 100;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  padding: 50px 62px 0px 62px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0, 0.8);
+}
+
+.modal-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: auto;
+  padding: 0 0 0 0;
+  width: 80%;
+  max-width: 550px;
+  border: 5px solid;
+  border-color: white;
+  padding: 10px 10px 5px 10px;
+}
+
+.slide {
+  display: none;
+  text-align: center;
+}
+
+.image-slide {
+  width: 100%;
+  max-width: 900px;
+}
+
+.modal-preview {
+  width: 100%;
+}
+
+.dots {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+img.preview,
+img.modal-preview {
+  opacity: 1;
+}
+
+img.active {
+  opacity: 0.6;
+}
+
+.preview:hover,
+.modal-preview:hover {
+  opacity: 1;
+}
+
+img.hover-shadow {
+  transition: 0.3s;
+}
+
+.hover-shadow:hover {
+  box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.5), 0 9px 20px 0 rgba(0, 0, 0, 1);
+}
+/* Content */
+
+.content {
+  border: 5px solid;
+  border-color: black;
+  background-color: white;
+  padding: 10px;
+}
+
+.close {
+  color: white;
+  position: absolute;
+  top: 10px;
+  right: 25px;
+  font-size: 35px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #999;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.previous,
+.next {
+  cursor: pointer;
+  position: absolute;
+  top: 60%;
+  width: auto;
+  padding: 16px;
+  margin-top: -50px;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+.next {
+  right: 2%;
+  border-radius: 3px 0 0 3px;
+}
+
+.previous:hover,
+.next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+@media screen and (max-width: 1050px) {
+  .col {
+      width: 50%;
+  }
+  .modal {
+      padding: 30px 32px 0px 32px;
+  }
+  .modal-content {
+      margin-top: 100px;
+      max-width: 800px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .modal {
+      padding: 30px 10px 0px 10px;
+  }
+}
+          </style>
+<script>
+let slideIndex = 1;
+showSlide(slideIndex);
+
+function openLightbox() {
+  document.getElementById('Lightbox').style.display = 'block';
+};
+
+function closeLightbox() {
+  document.getElementById('Lightbox').style.display = 'none';
+};
+
+function changeSlide(n) {
+  showSlide(slideIndex += n);
+};
+
+function toSlide(n) {
+  showSlide(slideIndex = n);
+};
+
+function showSlide(n) {
+  const slides = document.getElementsByClassName('slide');
+  let modalPreviews = document.getElementsByClassName('modal-preview');
+
+  if (n > slides.length) {
+      slideIndex = 1;
+  };
+
+  if (n < 1) {
+      slideIndex = slides.length;
+  };
+
+  for (let i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+  };
+
+  for (let i = 0; i < modalPreviews.length; i++) {
+      modalPreviews[i].className = modalPreviews[i].className.replace(' active', '');
+  };
+
+  slides[slideIndex - 1].style.display = 'block';
+  modalPreviews[slideIndex - 1].className += ' active';
+};
+</script>
+    
+ 
+</body>
+</html>
